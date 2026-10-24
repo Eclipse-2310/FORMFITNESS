@@ -1,0 +1,8 @@
+[functions.send-inquiry-email]
+verify_jwt = false
+
+[functions.export-inquiries-csv]
+verify_jwt = false
+
+[functions.inquiry-stats]
+verify_jwt = false

@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    background-color: #F4F1EA;
+    color: #23211D;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+  }
+
+  ::selection {
+    background-color: #5E6738;
+    color: #F4F1EA;
+  }
+}
+
+@layer utilities {
+  .focus-visible-ring {
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-olive focus-visible:ring-offset-2 focus-visible:ring-offset-canvas;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.2s ease;
+  }
+
+  .link-underline:hover {
+    background-size: 0 1px;
+  }
+
+  .form-input {
+    @apply w-full rounded-sm border border-canvas-400 bg-canvas-200 px-4 py-3 text-base text-ink placeholder:text-ink-50/40 transition-colors focus:border-olive focus:outline-none focus:ring-1 focus:ring-olive;
+  }
+}

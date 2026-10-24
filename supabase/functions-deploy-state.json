@@ -1,0 +1,17 @@
+{
+  "projectId": "72333285",
+  "functions": {
+    "export-inquiries-csv": {
+      "hasChanged": false,
+      "hash": "d63de1f8779b6c1f8c5e057802f7fa12dc89beaffe047ca47d117c35ef422b5e"
+    },
+    "inquiry-stats": {
+      "hasChanged": false,
+      "hash": "09cb642423d4ae94fcd1daae78b23530839533b7c825d63a4ecb241c08e6b5ac"
+    },
+    "send-inquiry-email": {
+      "hasChanged": false,
+      "hash": "5ce447fcfe839f5c50e048c7bee4be5cec1ab2a127aca4f35a26a9e2d2f7988c"
+    }
+  }
+}
