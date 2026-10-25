@@ -1,22 +1,23 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import { FAQ, FAQ_CATEGORIES, type FaqCategory } from '@/content';
 
-type Filter = FaqCategory | 'all';
+type Group = {
+  key: FaqCategory;
+  label: string;
+  items: typeof FAQ.items;
+};
+
+const groups: Group[] = FAQ_CATEGORIES.filter((c) => c.key !== 'all').map((c) => ({
+  key: c.key as FaqCategory,
+  label: c.label,
+  items: FAQ.items.filter((i) => i.category === c.key),
+}));
 
 export function Faq() {
-  const [open, setOpen] = useState<number | null>(0);
-  const [filter, setFilter] = useState<Filter>('all');
+  const [open, setOpen] = useState<string | null>(null);
 
-  const visibleItems = useMemo(() => {
-    if (filter === 'all') return FAQ.items;
-    return FAQ.items.filter((item) => item.category === filter);
-  }, [filter]);
-
-  const handleFilterChange = (f: Filter) => {
-    setFilter(f);
-    setOpen(null);
-  };
+  const toggle = (id: string) => setOpen(open === id ? null : id);
 
   return (
     <section id="faq" className="bg-canvas py-24 lg:py-36">
@@ -31,82 +32,55 @@ export function Faq() {
                 {FAQ.title}
               </h2>
               <p className="mt-6 max-w-xs text-base leading-relaxed text-ink-50">
-                Everything from how programmes are built to what happens when life gets in the way.
+                Grouped by topic so you can find what matters to you quickly.
               </p>
             </div>
           </div>
 
-          <div className="lg:col-span-8">
-            <div className="mb-6 flex flex-wrap gap-2">
-              {FAQ_CATEGORIES.map((cat) => {
-                const isActive = filter === cat.key;
-                const count =
-                  cat.key === 'all'
-                    ? FAQ.items.length
-                    : FAQ.items.filter((i) => i.category === cat.key).length;
-                return (
-                  <button
-                    key={cat.key}
-                    onClick={() => handleFilterChange(cat.key as Filter)}
-                    className={[
-                      'focus-visible-ring inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
-                      isActive
-                        ? 'bg-ink text-canvas'
-                        : 'bg-canvas-200 text-ink-60 hover:bg-canvas-300 hover:text-ink',
-                    ].join(' ')}
-                    aria-pressed={isActive}
-                  >
-                    {cat.label}
-                    <span
-                      className={[
-                        'inline-flex items-center justify-center rounded-full text-xs font-semibold tabular-nums',
-                        isActive
-                          ? 'bg-canvas/20 text-canvas'
-                          : 'bg-canvas-400/50 text-ink-50',
-                      ].join(' ')}
-                      style={{ minWidth: '1.25rem', height: '1.25rem', padding: '0 0.35rem' }}
-                    >
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+          <div className="lg:col-span-8 space-y-12">
+            {groups.map((group) => (
+              <div key={group.key}>
+                <div className="mb-4 flex items-center gap-3">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.15em] text-olive">
+                    {group.label}
+                  </h3>
+                  <span className="text-sm tabular-nums text-ink-40">
+                    {group.items.length}
+                  </span>
+                  <div className="h-px flex-1 bg-canvas-400" />
+                </div>
 
-            <dl className="divide-y divide-canvas-400 border-t border-canvas-400">
-              {visibleItems.map((item, i) => {
-                const isOpen = open === i;
-                return (
-                  <div key={`${filter}-${i}`}>
-                    <dt>
-                      <button
-                        onClick={() => setOpen(isOpen ? null : i)}
-                        className="focus-visible-ring group flex w-full items-center justify-between gap-4 py-5 text-left"
-                        aria-expanded={isOpen}
-                      >
-                        <span className="text-base font-medium text-ink transition-colors group-hover:text-olive lg:text-lg">
-                          {item.q}
-                        </span>
-                        <span className="shrink-0 text-olive transition-transform duration-300">
-                          {isOpen ? <Minus size={20} /> : <Plus size={20} />}
-                        </span>
-                      </button>
-                    </dt>
-                    <Expandable isOpen={isOpen}>
-                      <dd className="pb-6 pr-8 text-base leading-relaxed text-ink-50">
-                        {item.a}
-                      </dd>
-                    </Expandable>
-                  </div>
-                );
-              })}
-            </dl>
-
-            {visibleItems.length === 0 && (
-              <p className="py-12 text-center text-base text-ink-50">
-                No questions in this category yet.
-              </p>
-            )}
+                <dl className="divide-y divide-canvas-400 border-t border-canvas-400">
+                  {group.items.map((item, i) => {
+                    const id = `${group.key}-${i}`;
+                    const isOpen = open === id;
+                    return (
+                      <div key={id}>
+                        <dt>
+                          <button
+                            onClick={() => toggle(id)}
+                            className="focus-visible-ring group flex w-full items-center justify-between gap-4 py-5 text-left"
+                            aria-expanded={isOpen}
+                          >
+                            <span className="text-base font-medium text-ink transition-colors group-hover:text-olive lg:text-lg">
+                              {item.q}
+                            </span>
+                            <span className="shrink-0 text-olive transition-transform duration-300">
+                              {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+                            </span>
+                          </button>
+                        </dt>
+                        <Expandable isOpen={isOpen}>
+                          <dd className="pb-6 pr-8 text-base leading-relaxed text-ink-50">
+                            {item.a}
+                          </dd>
+                        </Expandable>
+                      </div>
+                    );
+                  })}
+                </dl>
+              </div>
+            ))}
           </div>
         </div>
       </div>
