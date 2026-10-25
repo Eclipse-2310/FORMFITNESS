@@ -1,9 +1,22 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Plus, Minus } from 'lucide-react';
-import { FAQ } from '@/content';
+import { FAQ, FAQ_CATEGORIES, type FaqCategory } from '@/content';
+
+type Filter = FaqCategory | 'all';
 
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
+  const [filter, setFilter] = useState<Filter>('all');
+
+  const visibleItems = useMemo(() => {
+    if (filter === 'all') return FAQ.items;
+    return FAQ.items.filter((item) => item.category === filter);
+  }, [filter]);
+
+  const handleFilterChange = (f: Filter) => {
+    setFilter(f);
+    setOpen(null);
+  };
 
   return (
     <section id="faq" className="bg-canvas py-24 lg:py-36">
@@ -24,11 +37,47 @@ export function Faq() {
           </div>
 
           <div className="lg:col-span-8">
+            <div className="mb-6 flex flex-wrap gap-2">
+              {FAQ_CATEGORIES.map((cat) => {
+                const isActive = filter === cat.key;
+                const count =
+                  cat.key === 'all'
+                    ? FAQ.items.length
+                    : FAQ.items.filter((i) => i.category === cat.key).length;
+                return (
+                  <button
+                    key={cat.key}
+                    onClick={() => handleFilterChange(cat.key as Filter)}
+                    className={[
+                      'focus-visible-ring inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200',
+                      isActive
+                        ? 'bg-ink text-canvas'
+                        : 'bg-canvas-200 text-ink-60 hover:bg-canvas-300 hover:text-ink',
+                    ].join(' ')}
+                    aria-pressed={isActive}
+                  >
+                    {cat.label}
+                    <span
+                      className={[
+                        'inline-flex items-center justify-center rounded-full text-xs font-semibold tabular-nums',
+                        isActive
+                          ? 'bg-canvas/20 text-canvas'
+                          : 'bg-canvas-400/50 text-ink-50',
+                      ].join(' ')}
+                      style={{ minWidth: '1.25rem', height: '1.25rem', padding: '0 0.35rem' }}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
             <dl className="divide-y divide-canvas-400 border-t border-canvas-400">
-              {FAQ.items.map((item, i) => {
+              {visibleItems.map((item, i) => {
                 const isOpen = open === i;
                 return (
-                  <div key={i}>
+                  <div key={`${filter}-${i}`}>
                     <dt>
                       <button
                         onClick={() => setOpen(isOpen ? null : i)}
@@ -52,6 +101,12 @@ export function Faq() {
                 );
               })}
             </dl>
+
+            {visibleItems.length === 0 && (
+              <p className="py-12 text-center text-base text-ink-50">
+                No questions in this category yet.
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -217,6 +217,15 @@ export const COACH = {
   note: 'Daniel is a fictional persona created for this portfolio concept. The photograph is licensed stock imagery and does not depict a real coach.',
 };
 
+export type FaqCategory = 'training' | 'schedule' | 'nutrition';
+
+export const FAQ_CATEGORIES: { key: FaqCategory | 'all'; label: string }[] = [
+  { key: 'all', label: 'All questions' },
+  { key: 'training', label: 'Training' },
+  { key: 'schedule', label: 'Schedule' },
+  { key: 'nutrition', label: 'Nutrition' },
+];
+
 export const FAQ = {
   eyebrow: 'FAQ',
   title: 'Questions I hear often',
@@ -224,54 +233,67 @@ export const FAQ = {
     {
       q: 'Do I need to have trained before?',
       a: 'No. About half the people I work with are starting barbell training for the first time or returning after years away. The first few sessions are spent learning the basics — how to squat, hinge, and press safely — before we add any meaningful load.',
+      category: 'training' as const,
     },
     {
       q: 'I do not have a gym membership. Can we still work together?',
       a: 'Yes. For 1-to-1 coaching I bring the equipment I need — barbells are not always practical, but dumbbells, kettlebells, and bands cover a great deal. For programme design, I will write around whatever you have access to, including a single pair of dumbbells at home.',
+      category: 'training' as const,
     },
     {
       q: 'How long until I see results?',
       a: 'If "results" means getting stronger on the main lifts, most people see clear progress within four to six weeks of consistent training. If it means a specific body composition change, that depends on factors outside the gym — sleep, nutrition, stress — and I will not promise a timeline I cannot control.',
+      category: 'training' as const,
     },
     {
       q: 'What does it cost?',
       a: 'Pricing depends on the option and frequency. Rather than publish numbers that may not fit your situation, I prefer we have a short conversation first. There is no obligation and no pressure to commit.',
+      category: 'schedule' as const,
     },
     {
       q: 'Do you train people online?',
       a: 'Programme Design is remote by design — you train on your own and we check in by message weekly. 1-to-1 coaching is in-person in South London. I do not currently offer live video coaching.',
+      category: 'schedule' as const,
     },
     {
       q: 'How are training programmes structured?',
       a: 'Every programme is built around three to four main lifts per session — typically a squat, a hinge, a press, and a pull. Accessory work fills in around those. The structure stays consistent week to week, but the weight, reps, and sets progress on a four-week cycle so you are always doing slightly more than last time. You will always know what you are doing and why.',
+      category: 'training' as const,
     },
     {
       q: 'What if I can only train twice a week?',
       a: 'Twice a week is enough to make meaningful progress, especially for strength. A two-day programme simply uses full-body sessions rather than splitting movements across days. Three sessions is the sweet spot for most people, but two is perfectly workable if that is what your schedule allows.',
+      category: 'schedule' as const,
     },
     {
       q: 'Can I reschedule or pause sessions?',
       a: 'Yes. Sessions can be rescheduled with 24 hours notice — life happens, and a missed session should not derail your programme. If you need to pause entirely for travel, illness, or a busy period at work, we put the programme on hold and resume where you left off. You do not lose progress by taking a week or two off.',
+      category: 'schedule' as const,
     },
     {
       q: 'How long is each session?',
       a: '1-to-1 coaching sessions run 60 minutes including warm-up and cool-down. If you are doing Programme Design on your own, sessions are typically 45 to 75 minutes depending on the day — I write the plan so you know roughly how long to budget, and you can adjust rest periods to fit a tighter window when needed.',
+      category: 'schedule' as const,
     },
     {
       q: 'What if I miss a week of training?',
       a: 'Missing a week is not a problem. When you return, we repeat the last completed week rather than pushing forward — this lets your body re-adapt without excessive soreness. Two or three missed weeks may mean we deload and rebuild slightly, but the strength you have built does not disappear that quickly.',
+      category: 'schedule' as const,
     },
     {
       q: 'Do programmes include nutrition guidance?',
       a: 'Programme Design includes basic nutrition principles — enough protein, sensible meal timing, and realistic habits — but I am not a registered dietitian and do not write detailed meal plans. If you need specific dietary support I will refer you to someone qualified. Training and nutrition are separate disciplines, and I respect that boundary.',
+      category: 'nutrition' as const,
     },
     {
       q: 'How do you track progress over time?',
       a: 'Every session is logged — weights, sets, reps, and notes on how each lift felt. For 1-to-1 clients I track this during the session. For Programme Design clients, you log your sessions in a shared spreadsheet and we review them in the weekly check-in. You can see your numbers trending up over weeks and months, which is the most honest measure of progress.',
+      category: 'training' as const,
     },
     {
       q: 'Is this a real business?',
       a: 'No. FORM / FITNESS is a fictional portfolio concept built to demonstrate design and front-end work. No services are actually offered, and the WhatsApp link is for demonstration only.',
+      category: 'training' as const,
     },
   ],
 };
