@@ -242,6 +242,34 @@ export const FAQ = {
       a: 'Programme Design is remote by design — you train on your own and we check in by message weekly. 1-to-1 coaching is in-person in South London. I do not currently offer live video coaching.',
     },
     {
+      q: 'How are training programmes structured?',
+      a: 'Every programme is built around three to four main lifts per session — typically a squat, a hinge, a press, and a pull. Accessory work fills in around those. The structure stays consistent week to week, but the weight, reps, and sets progress on a four-week cycle so you are always doing slightly more than last time. You will always know what you are doing and why.',
+    },
+    {
+      q: 'What if I can only train twice a week?',
+      a: 'Twice a week is enough to make meaningful progress, especially for strength. A two-day programme simply uses full-body sessions rather than splitting movements across days. Three sessions is the sweet spot for most people, but two is perfectly workable if that is what your schedule allows.',
+    },
+    {
+      q: 'Can I reschedule or pause sessions?',
+      a: 'Yes. Sessions can be rescheduled with 24 hours notice — life happens, and a missed session should not derail your programme. If you need to pause entirely for travel, illness, or a busy period at work, we put the programme on hold and resume where you left off. You do not lose progress by taking a week or two off.',
+    },
+    {
+      q: 'How long is each session?',
+      a: '1-to-1 coaching sessions run 60 minutes including warm-up and cool-down. If you are doing Programme Design on your own, sessions are typically 45 to 75 minutes depending on the day — I write the plan so you know roughly how long to budget, and you can adjust rest periods to fit a tighter window when needed.',
+    },
+    {
+      q: 'What if I miss a week of training?',
+      a: 'Missing a week is not a problem. When you return, we repeat the last completed week rather than pushing forward — this lets your body re-adapt without excessive soreness. Two or three missed weeks may mean we deload and rebuild slightly, but the strength you have built does not disappear that quickly.',
+    },
+    {
+      q: 'Do programmes include nutrition guidance?',
+      a: 'Programme Design includes basic nutrition principles — enough protein, sensible meal timing, and realistic habits — but I am not a registered dietitian and do not write detailed meal plans. If you need specific dietary support I will refer you to someone qualified. Training and nutrition are separate disciplines, and I respect that boundary.',
+    },
+    {
+      q: 'How do you track progress over time?',
+      a: 'Every session is logged — weights, sets, reps, and notes on how each lift felt. For 1-to-1 clients I track this during the session. For Programme Design clients, you log your sessions in a shared spreadsheet and we review them in the weekly check-in. You can see your numbers trending up over weeks and months, which is the most honest measure of progress.',
+    },
+    {
       q: 'Is this a real business?',
       a: 'No. FORM / FITNESS is a fictional portfolio concept built to demonstrate design and front-end work. No services are actually offered, and the WhatsApp link is for demonstration only.',
     },
