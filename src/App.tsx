@@ -9,7 +9,7 @@ import { Faq } from '@/components/Faq';
 import { Contact } from '@/components/Contact';
 import { Footer } from '@/components/Footer';
 import { LegalPage } from '@/components/LegalPage';
-import { Dashboard } from '@/components/Dashboard';
+import { Dashboard } from'@/components/Dashboard';
 import { PRIVACY_CONTENT, TERMS_CONTENT } from '@/content';
 
 type View = 'home' | 'privacy' | 'terms' | 'dashboard';
